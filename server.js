@@ -13,7 +13,11 @@ const { notFoundHandler, errorHandler } = require('./src/middleware/errorHandler
 const app = express();
 
 // ------------------------- Global Middleware -------------------------
-app.use(cors());          // mengizinkan request dari frontend (React di port lain)
+app.use(cors({
+  origin: '*', // Mengizinkan semua origin dari mana saja (sementara untuk testing/kolaborasi paling aman)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));         // mengizinkan request dari frontend (React di port lain)
 app.use(express.json());  // otomatis mem-parsing body JSON dari request
 
 // ------------------------------ Routes ---------------------------------
